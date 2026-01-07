@@ -37,6 +37,8 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput); // Using APawn's method directly for simplicity 
 	PlayerInputComponent->BindAxis("LookRight", this, &APawn::AddControllerYawInput); // Using APawn's method directly for simplicity
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AShooterCharacter::Jump);
+	PlayerInputComponent->BindAxis("LookUpRate", this, &AShooterCharacter::LookUpRate);
+	PlayerInputComponent->BindAxis("LookRightRate", this, &AShooterCharacter::LookRightRate);
 }
 
 void AShooterCharacter::MoveForward(float AxisValue)
@@ -62,4 +64,14 @@ void AShooterCharacter::MoveRight(float AxisValue)
 void AShooterCharacter::Jump()
 {
 	ACharacter::Jump();
+}
+
+void AShooterCharacter::LookUpRate(float AxisValue)
+{
+	AddControllerPitchInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AShooterCharacter::LookRightRate(float AxisValue)
+{
+	AddControllerYawInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds());
 }

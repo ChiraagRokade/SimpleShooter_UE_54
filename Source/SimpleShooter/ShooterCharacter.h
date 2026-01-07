@@ -37,4 +37,11 @@ private:
 	// void LookRight(float AxisValue);
 
 	void Jump();
+
+	void LookUpRate(float AxisValue);
+	void LookRightRate(float AxisValue);
+
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	float RotationRate = 10.0f;
+
 };
